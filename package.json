@@ -1,0 +1,20 @@
+{
+  "name": "echolog-root",
+  "version": "1.0.0",
+  "description": "EchoLog — Real-time verbal conversation capture to VS Code DevEx insights pipeline",
+  "private": true,
+  "scripts": {
+    "install:all": "cd gateway && npm install && cd ../vscode-ext && npm install && cd ../ai_engine && pip install -r requirements.txt",
+    "dev:gateway": "cd gateway && node server.js",
+    "dev:ai": "cd ai_engine && uvicorn main:app --reload --port 5000",
+    "dev": "concurrently --names \"GATEWAY,AI_ENGINE\" --prefix-colors \"cyan,magenta\" \"npm run dev:gateway\" \"npm run dev:ai\"",
+    "build:ext": "cd vscode-ext && npm run compile",
+    "lint:ext": "cd vscode-ext && npm run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
